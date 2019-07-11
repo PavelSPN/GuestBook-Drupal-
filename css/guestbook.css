@@ -1,0 +1,53 @@
+/* Messages style. */
+.guestbook-messages {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: auto;
+  text-align: left;
+  background: #e1f1ff;
+  padding: 5px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Button style. */
+.guestbook-button {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
+  background: -moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+  background: -webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+  background: -o-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+  background: -ms-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+  background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+  filter:progid: DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
+  background-color: #ededed;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #d6bcd6;
+  display: inline-block;
+  cursor: pointer;
+  color: #3a8a9e;
+  font-family: arial;
+  font-size: 12px;
+  padding:5px 15px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #e1e2ed;
+  margin-left: 5px;
+}
+.guestbook-button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
+  background: -moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+  background: -webkit-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+  background: -o-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+  background: -ms-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+  background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+  filter:progid: DXImageTransform.Microsoft.gradient(startColorstr = '#bab1ba', endColorstr = '#ededed',GradientType = 0);
+  background-color: #bab1ba;
+}
+.guestbook-button:active {
+  position: relative;
+  top: 1px;
+}
