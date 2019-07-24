@@ -1,16 +1,18 @@
 <?php
+
 /**
 * @file
 * Implementation of database access functions.
 */
 
 /**
- * Reading data from the database.
+ * Reading data from the guestbook database.
  *
  * @return
  *   A data array containing complete information about each database entry.
  */
-function guestbook_read_db($table = 'guestbook_drupal', $order = 'id', $direction = 'DESC', $limit = '10') {
+function guestbook_read_db($table = 'guestbook_drupal', $order = 'id',
+  $direction = 'DESC', $limit = '10') {
   $rows = array();
   $query = db_select($table, 't')
     ->extend('PagerDefault')
@@ -19,43 +21,47 @@ function guestbook_read_db($table = 'guestbook_drupal', $order = 'id', $directio
     ->limit($limit)
     ->execute();
   while ($value = $query->fetchAssoc()) {
-    $rows[] = [
-      $value['id'],      // Message id.
-      $value['uid'],     // User id.
-      $value['sid'],     // Session id.
-      $value['date'],    // Creation date of message.
-      $value['message'], // Message text.
-    ];
+    $rows[] = array(
+      'id' => $value['id'],
+      'uid' => $value['uid'],
+      'sid' => $value['sid'],
+      'date' => $value['date'],
+      'message' => check_plain($value['message']),
+      'user_name' => guestbook_name_by_id($value['uid']),
+      'formatted_date' => format_date($value['date'], $type = 'medium',
+        $format = '', $timezone = NULL, $langcode = NULL),
+    );
   }
+
   return $rows;
 }
 
 /**
  * Save or edit message.
  *
+ * Data from hook form. Contains $form['info_by_id'] = array('id', 'uid', 'sid', 'date', 'message').
+ * id - message id; uid - user id; sid - session id; date - message creation date; message - message text.
+ *
  * @param $form_state
- *   Data from hook form. Contains $form['infoById'] = array('id', 'uid', 'sid', 'date', 'message').
- *   id - message id; uid - user id; sid - session id; date - message creation date; message - message text.
  */
 function guestbook_save_edit_db($form_state) {
   global $user;
 
-  // If there is an array of data ($form['infoById']['id']), then edit the message
+  // If there is an array of data ($form['info_by_id']['id']), then edit the message
   // otherwise - save as a new message.
-  if (isset ($form_state['values']['infoById']['id'])) {
+  if (isset ($form_state['values']['info_by_id']['id'])) {
     db_update('guestbook_drupal')
       ->fields(array('message' => $form_state['values']['message']))
-      ->condition('id', $form_state['values']['infoById']['id'])
+      ->condition('id', $form_state['values']['info_by_id']['id'])
       ->execute();
-    drupal_goto('guestbook-page', array('query' => drupal_get_query_parameters()));
   }
   else {
     db_insert('guestbook_drupal')
       ->fields(array(
-          'uid' => $user->uid,
-          'sid' => $user->sid,
-          'date' => guestbook_time(),
-          'message' => $form_state['values']['message'],
+        'uid' => $user->uid,
+        'sid' => $user->sid,
+        'date' => guestbook_time(),
+        'message' => $form_state['values']['message'],
         )
       )
       ->execute();
@@ -82,6 +88,7 @@ function guestbook_name_by_id($uid) {
   else {
     $name = 'User does not exist';
   }
+
   return $name;
 }
 
@@ -89,9 +96,9 @@ function guestbook_name_by_id($uid) {
  * Delete message.
  *
  * @param $value
- *   Implements hook_load
  *   contains array('id', 'uid', 'sid', 'date', 'message').
- *   id - message id; uid - user id; sid - session id; date - message creation date; message - message text.
+ *   id - message id; uid - user id; sid - session id; date - message
+ *   creation date; message - message text.
  */
 function guestbook_message_delete($value) {
   global $user;

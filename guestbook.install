@@ -1,7 +1,15 @@
-<?php 
+<?php
+
+/**
+ * @file
+ * Install function for the guestbook module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
 function guestbook_schema() {
   $schema['guestbook_drupal'] = array(
-    // Specification for table "node".
     'description' => 'The base table for guestbook.',
     'fields' => array(
 	  'id' => array(
@@ -37,11 +45,7 @@ function guestbook_schema() {
         'default' => '',
       ),
     ),
-    'unique keys' => array(
-      'id' => array(
-        'id',
-      ),
-    ),
   );
+
   return $schema;
 }

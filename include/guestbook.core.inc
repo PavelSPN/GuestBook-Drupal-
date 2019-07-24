@@ -1,8 +1,28 @@
 <?php
+
 /**
  * @file
- * The implementation of the functions of the weather block.
+ * Implementation of user functions.
  */
+
+module_load_include('inc', 'guestbook', 'include/guestbook_db');
+
+/**
+ * URL for downloading xml weather file.
+ */
+define("WEATHER_URL", 'https://xml.meteoservice.ru/export/gismeteo/point/2897.xml');
+
+/**
+ * Get current time.
+ *
+ * @return
+ *   Return time stamp.
+ */
+function guestbook_time() {
+  $date = new DateTime();
+
+  return $date->getTimestamp();
+}
 
 /**
  * Get xml file by url and store it in locale file.
@@ -10,20 +30,25 @@
  */
 function guestbook_get_xml_weather() {
   // Get xml file by url.
-  $xml = file_get_contents("https://xml.meteoservice.ru/export/gismeteo/point/2897.xml");
+  $xml = file_get_contents(WEATHER_URL);
 
   // Store xml file in locale file.
-  if (isset($xml)){
+  if (isset($xml)) {
     $path = drupal_get_path('module', 'guestbook');
     file_put_contents($path . '/weather.xml', $xml);
   }
 }
 
 /**
- * Reading data from an xml file and converting it into html.
+ * Reading data from an xml file.
  *
  * @return
- *   Html markup.
+ *   An array containing the following data:
+ *   - 'city' - current city;
+ *   - 'date' - weather day, month, year;
+ *   - 'temp_max' - maximum temperature on the specified date;
+ *   - 'temp_min' - minimum temperature on the specified date;
+ *   - 'weather_error' - message 'The weather temporarily unavailable'.
  */
 function guestbook_weather() {
 
@@ -42,10 +67,11 @@ function guestbook_weather() {
       // Get information from object.
       $tmax = (string) $xml -> REPORT -> TOWN -> FORECAST -> TEMPERATURE['max'];
       $tmin = (string) $xml -> REPORT -> TOWN -> FORECAST -> TEMPERATURE['min'];
-      $date = (string) $xml -> REPORT -> TOWN -> FORECAST[0]['day'] . '.' . $xml -> REPORT -> TOWN -> FORECAST[0]['month']  . '.' .
+      $date = (string) $xml -> REPORT -> TOWN -> FORECAST[0]['day'] . '.' .
+        $xml -> REPORT -> TOWN -> FORECAST[0]['month']  . '.' .
         $xml -> REPORT -> TOWN -> FORECAST[0]['year'];
 
-      $city = 'Витебск';
+      $city = t('Vitebsk');
 
       // Store information in array.
       $weather = array(
@@ -54,20 +80,14 @@ function guestbook_weather() {
         'temp_max' => $tmax,
         'temp_min' => $tmin,
       );
-
-      // Create an html data of weather.
-      $data = '<div>' . $weather['city'] . '</div>';
-      $data .= '<p>' . $weather['date'] . '</p>';
-      $data .= '<div>Макс. темп. &nbsp  ' . $weather['temp_max'] . '&deg</div>';
-      $data .= '<div>Мин. темп. &nbsp ' . $weather['temp_min'] . '&deg</div>';
     }
     else {
-      $data = 'Погода временно не доступна';
+      $weather['weather_error'] = t('The weather temporarily unavailable');
     }
-
   }
   else {
-    $data = 'Погода временно не доступна';
+    $weather['weather_error'] = t('The weather temporarily unavailable');
   }
-  return '<div>' . $data . '</div>';
+
+  return $weather;
 }

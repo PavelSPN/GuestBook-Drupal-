@@ -1,5 +1,5 @@
 /* Messages style. */
-.guestbook-messages {
+.guestbook-messages-all {
   width: 100%;
   height: auto;
   float: left;
@@ -13,6 +13,20 @@
   box-sizing: border-box;
 }
 
+.guestbook-message {
+  border-radius: 10px;
+  border: 1px solid #BAC1FF;
+  background: #E7E6FF;
+}
+
+.guestbook-message-text {
+  margin: 5px;
+}
+
+.guestbook-user-date {
+  margin: 5px;
+}
+
 /* Button style. */
 .guestbook-button {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
@@ -23,19 +37,19 @@
   background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
   filter:progid: DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
   background-color: #ededed;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   border: 1px solid #d6bcd6;
   display: inline-block;
   cursor: pointer;
   color: #3a8a9e;
   font-family: arial;
-  font-size: 12px;
-  padding:5px 15px;
+  font-size: 14px;
+  padding: 5px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #e1e2ed;
-  margin-left: 5px;
+  margin: 5px;
 }
 .guestbook-button:hover {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
