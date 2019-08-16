@@ -2,11 +2,16 @@
 
 /**
 * @file
-* Build page for guestbook and weather block.
+* Contains hooks for guestbook module.
 */
 
 module_load_include('inc', 'guestbook', 'include/guestbook.form');
 module_load_include('inc', 'guestbook', 'include/guestbook.core');
+
+/**
+ * URL for downloading xml weather file.
+ */
+define("WEATHER_URL", 'https://xml.meteoservice.ru/export/gismeteo/point/2897.xml');
 
 /**
  * Implements hook_permission().
@@ -25,34 +30,30 @@ function guestbook_permission() {
 /**
 * Implements hook_menu(). 
 */
- function guestbook_menu() {
-   // Main page.
-   $items['guestbook-page'] = array(
-     'title' => 'Guestbook',
-     'page callback'   => 'drupal_get_form',
-     'page arguments'  => array('guestbook_page_form'),
-     'access arguments' => array('access guestbook messages'),
-     'type' => MENU_NORMAL_ITEM,
+function guestbook_menu() {
+  // Main page.
+  $items['guestbook-page'] = array(
+    'title' => 'Guestbook',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('guestbook_page_form'),
+    'access arguments' => array('access guestbook messages'),
   );
-   // Edit message.
-   $items['guestbook-page/%guestbook_mid/edit'] = array(
-     'title'            => 'Guestbook',
-     'page callback'    => 'drupal_get_form',
-     'page arguments'   => array('guestbook_page_form', 1),
-     'access arguments' => array('access guestbook content'),
-     'type' => MENU_NORMAL_ITEM,
+  // Edit message.
+  $items['guestbook-page/%guestbook_mid/edit'] = array(
+    'title' => 'Guestbook',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('guestbook_page_form', 1),
+    'access arguments' => array('access guestbook content'),
+  );
+  // Delete message.
+  $items['guestbook-page/%guestbook_mid/delete'] = array(
+    'title' => 'Delete message',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('guestbook_message_form_delete', 1),
+    'access arguments' => array('access guestbook content'),
+  );
 
-   );
-   // Delete message.
-   $items['guestbook-page/%guestbook_mid/delete'] = array(
-     'title'            => 'Delete message',
-     'page callback'    => 'guestbook_message_delete',
-     'page arguments'   => array(1),
-     'access arguments' => array('access guestbook content'),
-     'type' => MENU_NORMAL_ITEM,
-   );
-
-   return $items;
+  return $items;
 }
 
 /**
@@ -60,7 +61,8 @@ function guestbook_permission() {
  *
  * @param $mid
  *   Integer specifying the message id to load.
- * @return
+ *
+ * @return array
  *   A fully-loaded array of message info ('id', 'uid', 'sid', 'date', 'message').
  *   id - message id; uid - user id; sid - session id; date - message creation
  *   date; message - message text.
@@ -102,13 +104,20 @@ function guestbook_block_info() {
  * Implements hook_block_view().
  */
 function guestbook_block_view($delta = '') {
-  $block = [];
-  switch($delta){
+  $block = array();
+  switch ($delta) {
     case 'weather':
       $block['subject'] = t('Vitebsk Weather');
-      $block['content'] = theme('guestbook_weather_template', array(
-        'weather' => guestbook_weather(),
+      $block['content'] = array(
+        '#markup' => theme('guestbook_weather_template', array(
+          'weather' => guestbook_weather(),
           )
+        ),
+        '#attached' => array(
+          'css' => array(
+            drupal_get_path('module', 'guestbook') . '/css/guestbook.css',
+          ),
+        )
       );
       break;
   }

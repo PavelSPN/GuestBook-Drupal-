@@ -1,18 +1,4 @@
 /* Messages style. */
-.guestbook-messages-all {
-  width: 100%;
-  height: auto;
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  overflow: auto;
-  text-align: left;
-  background: #e1f1ff;
-  padding: 5px;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
 .guestbook-message {
   border-radius: 10px;
   border: 1px solid #BAC1FF;
@@ -21,10 +7,12 @@
 
 .guestbook-message-text {
   margin: 5px;
+  font-weight: bold;
 }
 
 .guestbook-user-date {
   margin: 5px;
+  font-style: italic;
 }
 
 /* Button style. */
@@ -35,7 +23,7 @@
   background: -o-linear-gradient(top, #ededed 5%, #bab1ba 100%);
   background: -ms-linear-gradient(top, #ededed 5%, #bab1ba 100%);
   background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
-  filter:progid: DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
+  filter:progid: DXImageTransform.Microsoft.gradient(startColorstr = '#ededed', endColorstr = '#bab1ba', GradientType = 0);
   background-color: #ededed;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -51,6 +39,7 @@
   text-shadow: 0px 1px 0px #e1e2ed;
   margin: 5px;
 }
+
 .guestbook-button:hover {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
   background: -moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
@@ -61,7 +50,13 @@
   filter:progid: DXImageTransform.Microsoft.gradient(startColorstr = '#bab1ba', endColorstr = '#ededed',GradientType = 0);
   background-color: #bab1ba;
 }
+
 .guestbook-button:active {
   position: relative;
   top: 1px;
+}
+
+.guestbook-weather-city {
+  margin: 5px;
+  font-weight: bold;
 }
