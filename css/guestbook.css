@@ -56,7 +56,12 @@
   top: 1px;
 }
 
+/* Weather style. */
 .guestbook-weather-city {
   margin: 5px;
   font-weight: bold;
+}
+
+.guestbook-weather-date {
+  margin: 10px;
 }

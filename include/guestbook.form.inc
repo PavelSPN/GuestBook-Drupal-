@@ -8,17 +8,17 @@
 /**
  * Guestbook page form.
  *
- * @param $value
- *   contains array('id', 'uid', 'sid', 'date', 'message').
  * @param $form
  *   An associative array containing the structure of the form.
  * @param $form_state
  *   An associative array containing the current state of the form.
+ * @param $value
+ *   Contains array('id', 'uid', 'sid', 'date', 'message').
  *
  * @return array
  *   Return form.
  */
-function guestbook_page_form($form, $form_state, $value= NULL) {
+function guestbook_page_form($form, $form_state, $value = NULL) {
   global $user;
 
   // Get tex for editing and saving data about the message in
@@ -85,10 +85,10 @@ function guestbook_page_form($form, $form_state, $value= NULL) {
  */
 function guestbook_message_validate($element, $form, &$form_state) {
   if (empty($element['#value'] || drupal_strlen($element['#value']) > 1000)) {
-    form_error($element, t('Field "@fieldname" must be less than @c 
-    chars and can\'t be empty.', array(
-      '@fieldname' => t('message'),
-      '@c' => 1000,
+    form_error($element, t("Field '@fieldname' must be less than @c 
+      chars and can't be empty.", array(
+        '@fieldname' => t('message'),
+        '@c' => 1000,
       ))
     );
   }
@@ -109,12 +109,12 @@ function guestbook_page_form_submit($form, &$form_state) {
 /**
  * Form constructor for the message deletion confirmation form.
  *
- * @param $value
- *   contains array('id', 'uid', 'sid', 'date', 'message').
  * @param $form
  *   An associative array containing the structure of the form.
  * @param $form_state
  *   An associative array containing the current state of the form.
+ * @param $value
+ *   Contains array('id', 'uid', 'sid', 'date', 'message').
  *
  * @return array
  *   Return form.

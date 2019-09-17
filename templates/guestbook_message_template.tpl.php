@@ -35,33 +35,15 @@
         <?php print $value['message']; ?>
       </div>
 
-      <?php // If user is logged and current session id = stored id
-            // in database then generate html markup for
-            // edit button and delete button.
+      <?php
+      // If user is logged and current session id = stored id
+      // in database then generate html markup for
+      // edit button and delete button.
       ?>
       <?php if ($user->uid && $value['sid'] == $user->sid): ?>
-        <?php $params = drupal_get_query_parameters(); ?>
-        <?php $links = l(t('edit'), 'guestbook-page/' . $value['id'] . '/edit',
-                array(
-                  'attributes' => array(
-                    'class' => array('guestbook-button'),
-                  ),
-                  'query' => $params,
-                )
-              )
-              . l(t('delete'), 'guestbook-page/' . $value['id'] . '/delete',
-                array(
-                  'attributes' => array(
-                    'class' => array('guestbook-button'),
-                  ),
-                  'query' => $params,
-                )
-              ); ?>
-
           <div>
-            <?php print $links ?>
+            <?php print $value['links']; ?>
           </div>
-
       <?php endif; ?>
     </div>
   <?php endforeach;  ?>

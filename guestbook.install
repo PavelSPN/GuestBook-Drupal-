@@ -12,7 +12,7 @@ function guestbook_schema() {
   $schema['guestbook_drupal'] = array(
     'description' => 'The base table for guestbook.',
     'fields' => array(
-	  'id' => array(
+      'id' => array(
         'description' => 'The primary identifier for a message.',
         'type' => 'serial',
         'unsigned' => TRUE,

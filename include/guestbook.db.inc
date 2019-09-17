@@ -19,6 +19,7 @@ function guestbook_read_db($table = 'guestbook_drupal', $order = 'id', $directio
     ->orderBy($order, $direction)
     ->limit($limit)
     ->execute();
+
   while ($value = $query->fetchAssoc()) {
     $rows[] = array(
       'id' => $value['id'],
@@ -51,8 +52,7 @@ function guestbook_save_edit_db($form_state) {
     'sid' => $user->sid,
     'date' => guestbook_time(),
     'message' => $form_state['values']['message'],
-    'id' => isset ($form_state['values']['info_by_id']['id'])
-      ? $form_state['values']['info_by_id']['id'] : NULL,
+    'id' => isset ($form_state['values']['info_by_id']['id']) ? $form_state['values']['info_by_id']['id'] : NULL,
   );
 
   // If exists 'id', then edit the message, otherwise - save as a new message.
@@ -71,7 +71,7 @@ function guestbook_save_edit_db($form_state) {
  *   Integer specifying the user id.
  *
  * @return string
- *   Returns user name.
+ *   Returns user name or 'User does not exist'.
  */
 function guestbook_name_by_id($uid) {
   if ($uid) {
@@ -102,4 +102,25 @@ function guestbook_message_delete($id) {
   drupal_set_message(t('Message deleted!'));
   $params = drupal_get_query_parameters();
   drupal_goto('guestbook-page', array('query' => $params));
+}
+
+/**
+ * Gets info by message id.
+ *
+ * @param $mid
+ *   Integer specifying the message id.
+ *
+ * @return array
+ *   A fully-loaded array of message info ('id', 'uid', 'sid', 'date', 'message').
+ *   id - message id; uid - user id; sid - session id; date - message creation
+ *   date; message - message text.
+ */
+function guestbook_info_by_mid($mid) {
+  $query = db_select('guestbook_drupal', 't')
+    ->fields('t', array('id', 'uid', 'sid', 'date', 'message'))
+    ->condition('t.id', $mid)
+    ->execute();
+  $value = $query->fetchAssoc();
+
+  return $value;
 }

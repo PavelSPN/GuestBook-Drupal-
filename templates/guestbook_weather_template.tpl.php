@@ -27,17 +27,15 @@
       </div>
 
       <div class = 'guestbook-weather-date'>
-        <p>
-          <?php print $weather['date'] ?>
-        </p>
+        <?php print $weather['date'] ?>
       </div>
 
       <div class = 'guestbook-weather-temperature'>
         <div>
-          Max. temp. &nbsp <?php print $weather['temp_max'] ?> &deg
+          <?php print $weather['temp_max'] ?>
         </div>
         <div>
-          Мin. temp. &nbsp <?php print $weather['temp_min'] ?> &deg
+          <?php print $weather['temp_min'] ?>
         </div>
       </div>
     <?php endif; ?>

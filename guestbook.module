@@ -7,11 +7,12 @@
 
 module_load_include('inc', 'guestbook', 'include/guestbook.form');
 module_load_include('inc', 'guestbook', 'include/guestbook.core');
+module_load_include('inc', 'guestbook', 'include/guestbook.theme');
 
 /**
  * URL for downloading xml weather file.
  */
-define("WEATHER_URL", 'https://xml.meteoservice.ru/export/gismeteo/point/2897.xml');
+define('WEATHER_URL', 'https://xml.meteoservice.ru/export/gismeteo/point/2897.xml');
 
 /**
  * Implements hook_permission().
@@ -68,13 +69,7 @@ function guestbook_menu() {
  *   date; message - message text.
  */
 function guestbook_mid_load($mid) {
-  $query = db_select('guestbook_drupal', 't')
-    ->fields('t', array('id', 'uid', 'sid', 'date', 'message'))
-    ->condition('t.id', $mid)
-    ->execute();
-  $value = $query->fetchAssoc();
-
-  return $value;
+  return guestbook_info_by_mid($mid);
 }
 
 /*
@@ -134,13 +129,13 @@ function guestbook_theme() {
       'variables' => array(
         'body' => NULL,
       ),
-      'template' => 'template/guestbook_message_template',
+      'template' => 'templates/guestbook_message_template',
     ),
     'guestbook_weather_template' => array(
       'variables' => array(
         'weather' => NULL,
       ),
-      'template' => 'template/guestbook_weather_template',
+      'template' => 'templates/guestbook_weather_template',
     ),
   );
 }

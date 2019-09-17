@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Implementation of core functions.
+ * Contains core functions.
  */
 
 module_load_include('inc', 'guestbook', 'include/guestbook.db');
@@ -63,13 +63,15 @@ function guestbook_weather() {
     $xml = simplexml_load_file($path . '/weather.xml');
 
     // Gets information from object.
-    $tmax = (string) $xml->REPORT->TOWN->FORECAST->TEMPERATURE['max'];
-    $tmin = (string) $xml->REPORT->TOWN->FORECAST->TEMPERATURE['min'];
-    $date = (string) $xml->REPORT->TOWN->FORECAST[0]['day'];
-    $date .= (string) '.' . $xml->REPORT->TOWN->FORECAST[0]['month'];
-    $date .= (string) '.' . $xml->REPORT->TOWN->FORECAST[0]['year'];
+    $tmax = $xml->REPORT->TOWN->FORECAST->TEMPERATURE['max'];
+    $tmin = $xml->REPORT->TOWN->FORECAST->TEMPERATURE['min'];
+    $date = $xml->REPORT->TOWN->FORECAST[0]['day'];
+    $date .= '.' . $xml->REPORT->TOWN->FORECAST[0]['month'];
+    $date .= '.' . $xml->REPORT->TOWN->FORECAST[0]['year'];
 
     $city = t('Vitebsk');
+    $tmax = t('Max temp &nbsp ') . $tmax . '&deg';
+    $tmin = t('Min temp &nbsp ') . $tmin . '&deg';
 
     // Stores information in array.
     $weather = array(
