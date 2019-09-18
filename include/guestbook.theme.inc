@@ -8,8 +8,8 @@
 /**
  * Implements hook_preprocess_hook().
  *
- * Add global variable user
- * and 'delete' and 'edit' links to message array.
+ * Adds global variable user,
+ * 'delete' and 'edit' links to message array.
  */
 function guestbook_preprocess_guestbook_message_template(&$variables){
   // Add global variable user.

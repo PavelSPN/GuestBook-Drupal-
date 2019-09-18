@@ -1,8 +1,8 @@
 /* Messages style. */
 .guestbook-message {
   border-radius: 10px;
-  border: 1px solid #BAC1FF;
-  background: #E7E6FF;
+  border: 1px solid #bac1ff;
+  background: #e7e6ff;
 }
 
 .guestbook-message-text {

@@ -2,41 +2,41 @@
 <MMWEATHER>
 	<REPORT type="frc3">
 		<TOWN index="2897" sname="%D0%92%D0%B8%D1%82%D0%B5%D0%B1%D1%81%D0%BA%2C+%D0%91%D0%B5%D0%BB%D0%B0%D1%80%D1%83%D1%81%D1%8C" latitude="55" longitude="30">
-                    			<FORECAST day="17" month="09" year="2019" hour="15" tod="2" predict="0" weekday="3">
+                    			<FORECAST day="18" month="09" year="2019" hour="15" tod="2" predict="0" weekday="4">
 				<PHENOMENA cloudiness="2" precipitation="4" rpower="0" spower="0"/>
-				<PRESSURE max="750" min="750"/>
-				<TEMPERATURE max="12" min="11"/>
-				<WIND min="3" max="4" direction="7"/>
-				<RELWET max="70" min="68"/>
+				<PRESSURE max="750" min="747"/>
+				<TEMPERATURE max="10" min="9"/>
+				<WIND min="2" max="2" direction="0"/>
+				<RELWET max="90" min="86"/>
 
 				<HEAT min="7" max="7"/>
 			</FORECAST>
-                        			<FORECAST day="17" month="09" year="2019" hour="21" tod="3" predict="0" weekday="3">
+                        			<FORECAST day="18" month="09" year="2019" hour="21" tod="3" predict="0" weekday="4">
 				<PHENOMENA cloudiness="3" precipitation="10" rpower="0" spower="0"/>
-				<PRESSURE max="750" min="748"/>
-				<TEMPERATURE max="12" min="7"/>
-				<WIND min="1" max="3" direction="7"/>
-				<RELWET max="90" min="70"/>
-
-				<HEAT min="5" max="5"/>
-			</FORECAST>
-                        			<FORECAST day="18" month="09" year="2019" hour="03" tod="0" predict="0" weekday="4">
-				<PHENOMENA cloudiness="2" precipitation="4" rpower="0" spower="0"/>
-				<PRESSURE max="748" min="746"/>
-				<TEMPERATURE max="8" min="7"/>
-				<WIND min="1" max="2" direction="5"/>
-				<RELWET max="98" min="86"/>
-
-				<HEAT min="5" max="5"/>
-			</FORECAST>
-                        			<FORECAST day="18" month="09" year="2019" hour="09" tod="1" predict="0" weekday="4">
-				<PHENOMENA cloudiness="2" precipitation="4" rpower="0" spower="0"/>
-				<PRESSURE max="747" min="745"/>
-				<TEMPERATURE max="9" min="7"/>
-				<WIND min="1" max="1" direction="3"/>
-				<RELWET max="98" min="91"/>
+				<PRESSURE max="754" min="751"/>
+				<TEMPERATURE max="10" min="7"/>
+				<WIND min="1" max="3" direction="0"/>
+				<RELWET max="96" min="85"/>
 
 				<HEAT min="6" max="6"/>
+			</FORECAST>
+                        			<FORECAST day="19" month="09" year="2019" hour="03" tod="0" predict="0" weekday="5">
+				<PHENOMENA cloudiness="3" precipitation="10" rpower="0" spower="0"/>
+				<PRESSURE max="756" min="754"/>
+				<TEMPERATURE max="7" min="7"/>
+				<WIND min="1" max="2" direction="0"/>
+				<RELWET max="99" min="93"/>
+
+				<HEAT min="5" max="5"/>
+			</FORECAST>
+                        			<FORECAST day="19" month="09" year="2019" hour="09" tod="1" predict="0" weekday="5">
+				<PHENOMENA cloudiness="2" precipitation="4" rpower="0" spower="0"/>
+				<PRESSURE max="758" min="757"/>
+				<TEMPERATURE max="8" min="7"/>
+				<WIND min="1" max="2" direction="0"/>
+				<RELWET max="99" min="87"/>
+
+				<HEAT min="4" max="4"/>
 			</FORECAST>
             		</TOWN>
 	</REPORT>

@@ -21,7 +21,6 @@ function guestbook_schema() {
       'uid' => array(
         'description' => 'Identifier for a user.',
         'type' => 'int',
-        'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'sid' => array(

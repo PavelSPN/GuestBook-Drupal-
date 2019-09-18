@@ -28,9 +28,7 @@ function guestbook_read_db($table = 'guestbook_drupal', $order = 'id', $directio
       'date' => $value['date'],
       'message' => check_plain($value['message']),
       'user_name' => guestbook_name_by_id($value['uid']),
-      'formatted_date' => format_date($value['date'], $type = 'medium',
-        $format = '', $timezone = NULL, $langcode = NULL
-      ),
+      'formatted_date' => format_date($value['date']),
     );
   }
 
@@ -52,7 +50,7 @@ function guestbook_save_edit_db($form_state) {
     'sid' => $user->sid,
     'date' => guestbook_time(),
     'message' => $form_state['values']['message'],
-    'id' => isset ($form_state['values']['info_by_id']['id']) ? $form_state['values']['info_by_id']['id'] : NULL,
+    'id' => !empty ($form_state['values']['info_by_id']['id']) ? $form_state['values']['info_by_id']['id'] : NULL,
   );
 
   // If exists 'id', then edit the message, otherwise - save as a new message.
@@ -112,8 +110,11 @@ function guestbook_message_delete($id) {
  *
  * @return array
  *   A fully-loaded array of message info ('id', 'uid', 'sid', 'date', 'message').
- *   id - message id; uid - user id; sid - session id; date - message creation
- *   date; message - message text.
+ *   - id: message id;
+ *   - uid: user id;
+ *   - sid: session id;
+ *   - date: message creation date;
+ *   - message: message text.
  */
 function guestbook_info_by_mid($mid) {
   $query = db_select('guestbook_drupal', 't')

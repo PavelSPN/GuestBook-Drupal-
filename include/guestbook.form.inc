@@ -57,7 +57,7 @@ function guestbook_page_form($form, $form_state, $value = NULL) {
       '#type' => 'submit',
       '#attributes' => array(
         'class' => array('guestbook-button'),
-        ),
+      ),
       '#value' => isset($value['id']) ? t('Edit') : t('Save'),
     );
 
@@ -69,7 +69,7 @@ function guestbook_page_form($form, $form_state, $value = NULL) {
         '#href' => 'guestbook-page',
         '#options' => array(
           'query' => drupal_get_query_parameters(),
-          ),
+        ),
         '#attributes' => array(
           'class' => array('guestbook-button'),
         ),
@@ -86,10 +86,12 @@ function guestbook_page_form($form, $form_state, $value = NULL) {
 function guestbook_message_validate($element, $form, &$form_state) {
   if (empty($element['#value'] || drupal_strlen($element['#value']) > 1000)) {
     form_error($element, t("Field '@fieldname' must be less than @c 
-      chars and can't be empty.", array(
-        '@fieldname' => t('message'),
-        '@c' => 1000,
-      ))
+      chars and can't be empty.",
+        array(
+          '@fieldname' => t('message'),
+          '@c' => 1000,
+        )
+      )
     );
   }
 }

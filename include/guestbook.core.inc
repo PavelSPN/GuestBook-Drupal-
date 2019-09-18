@@ -8,10 +8,10 @@
 module_load_include('inc', 'guestbook', 'include/guestbook.db');
 
 /**
- * Gets current time.
+ * Returns current time.
  *
  * @return string
- *   Return time stamp.
+ *   Returns time stamp.
  */
 function guestbook_time() {
   $date = new DateTime();
@@ -20,13 +20,13 @@ function guestbook_time() {
 }
 
 /**
- * Get xml file by url.
+ * Gets xml file by url.
  *
  * The file is saved in the root folder of the module.
  */
 function guestbook_get_xml_weather() {
   // Get xml file by url.
-  $xml = file_get_contents(WEATHER_URL);
+  $xml = file_get_contents(GUESTBOOK_WEATHER_URL);
 
   // Store xml file in locale file for weather block.
   if (isset($xml)) {
@@ -40,11 +40,11 @@ function guestbook_get_xml_weather() {
  *
  * @return array
  *   An array containing the following data:
- *   - 'city' - current city;
- *   - 'date' - weather day, month, year;
- *   - 'temp_max' - maximum temperature on the specified date;
- *   - 'temp_min' - minimum temperature on the specified date;
- *   - 'weather_error' - message 'The weather temporarily unavailable'.
+ *   - 'city': current city;
+ *   - 'date': weather day, month, year;
+ *   - 'temp_max': maximum temperature on the specified date;
+ *   - 'temp_min': minimum temperature on the specified date;
+ *   - 'weather_error': message 'The weather temporarily unavailable'.
  */
 function guestbook_weather() {
 
@@ -70,8 +70,8 @@ function guestbook_weather() {
     $date .= '.' . $xml->REPORT->TOWN->FORECAST[0]['year'];
 
     $city = t('Vitebsk');
-    $tmax = t('Max temp &nbsp ') . $tmax . '&deg';
-    $tmin = t('Min temp &nbsp ') . $tmin . '&deg';
+    $tmax = t('Max temp.') . '&nbsp ' . $tmax . '&deg';
+    $tmin = t('Min temp.') . '&nbsp ' . $tmin . '&deg';
 
     // Stores information in array.
     $weather = array(
