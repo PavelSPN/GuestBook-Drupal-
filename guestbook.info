@@ -1,0 +1,4 @@
+name = Guest Book
+description = In guest book you can leave your messages, edit them and delete. Also you can see the weather for today into a separate block.
+core = 7.x
+version = 7.x-1.0
